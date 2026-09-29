@@ -66,13 +66,6 @@ string display(Stack& s) {
     }
     return hasil;
 }
-void clear(Stack& s) {
-    while (s.top != nullptr) {
-        Node* temp = s.top;
-        s.top = s.top->next;
-        delete temp;
-    }
-}
 
 // =============================================================================
 
