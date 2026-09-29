@@ -66,28 +66,85 @@ string display(Stack& s) {
     }
     return hasil;
 }
+void clear(Stack& s) {
+    while (s.top != nullptr) {
+        Node* temp = s.top;
+        s.top = s.top->next;
+        delete temp;
+    }
+}
 
 // =============================================================================
 
 // SOAL 1
 bool push(Stack& s, int nilai) {
-    
+    Node* newnode = new Node;
+
+    if (newnode == nullptr) {
+        return false;
+    }
+
+    newnode->data = nilai;
+    newnode->next = s.top;
+    s.top = newnode;
+    return true;
+}
+bool peak(Stack& s, int& nilai) {
+    if (s.top == nullptr) {
+        return false;
+    }
+    nilai = s.top->data;
 
     return true;
 }
 
 // SOAL 2
 bool pop(Stack& s, int& nilai) {
-    return false;
+    if (s.top == nullptr) {
+        return false;
+    }
+
+    Node* temp = s.top;
+    nilai = temp->data;
+    s.top = s.top->next;
+    delete temp;
+
+    return true;
 }
 
 // SOAL 3
 void clear(Stack& s) {
+    while (s.top != nullptr) {
+        Node* temp = s.top;
+        s.top = s.top->next;
+        delete temp;
+    }
 }
 
 // SOAL 4
 bool kurungSeimbang(const string& ekspresi) {
-    return false;
+    Stack s;
+
+    inisialisasi(s);
+    for (char c: ekspresi) {
+        if (c == '(' || c == '[' || c == '{') {
+            push(s, c);
+        } else if (c == ')' || c == ']' || c == '}') {
+            int topChar;
+            if (!pop(s, topChar)) {
+                return false; 
+            }
+            if ((c == ')' && topChar != '(') ||
+                (c == ']' && topChar != '[') ||
+                (c == '}' && topChar != '{')) {
+                return false;
+            }
+        }
+    }
+    if (!isEmpty(s)) {
+        return false;
+    }
+    return true;
 }
 
 // =============================================================================
