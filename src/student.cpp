@@ -71,7 +71,9 @@ string display(Stack& s) {
 
 // SOAL 1
 bool push(Stack& s, int nilai) {
-    return false;
+    
+
+    return true;
 }
 
 // SOAL 2
